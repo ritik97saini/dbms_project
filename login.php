@@ -10,31 +10,48 @@
         <div id="header1"><center><h1>WINTER TRAINING PROJECT</h1></center></div>
         
         <div id="login">
+        <form action="includes/login.inc.php" method="POST">
             <br>
             <h2 style="color:white;">Login</h2>
             <div class="username">
-                <input type="text" name="email" id="email" tabindex="1" placeholder="Username" aria-label="Username">
+                <input type="text" name="uid" id="email" tabindex="1" placeholder="User ID" aria-label="User ID">
             </div>
             <br>
             <div class="pwd">
-                <input type="password"  name="pass" id="pass" tabindex="1" placeholder="Password" autofocus="1" aria-label="Password">
+                <input type="password"  name="pwd" id="pass" tabindex="1" placeholder="Password" autofocus="1" aria-label="Password">
             </div>
             <br>
             
             <div id="loginbtn">
                 <br>
-                <button value="1" id="loginbutton" name="login" tabindex="1" type="submit">Log In</button>
+                <button value="1" id="loginbutton" name="submit" tabindex="1" type="submit">Log In</button>
             </div>
+        </form>
             <br>
             <div id="signupopt">
                 Don't have an account? <a id="sulink" href="#" onclick="myFunc()">Sign Up</a>
             </div>
             <br>
             <br>
+       
         </div>
         
         
+<?php 
+
+    if(isset($_GET['login']))
+    {
+        if($_GET['login']=="empty")
+        {
+            echo "<p>enter all fields</p>";
+        }
+        elseif($_GET['login']=="wrong")
+        {
+            echo "<p>wrong username or password</p>";
+        }
         
+    }
+?>
         <!--
         <div id="supage">
             <br><br>
@@ -61,4 +78,3 @@
         -->
     </body>
 </html>
-        
