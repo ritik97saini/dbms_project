@@ -188,7 +188,14 @@ Female <input type="radio" name="gender" value="Female" />
 </td>
 </tr>
 
-
+ <!----- Upload Resume ------------------------------------------------------------>
+<tr>
+	<td>Resume</td>
+	<td><div>  
+  			<input type="file" name="resume" placeholder="resume"> 
+  		</div>
+  	</td>
+</tr>
  
 
 <!----- Submit and Reset ------------------------------------------------>
