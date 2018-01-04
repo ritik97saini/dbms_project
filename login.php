@@ -43,11 +43,11 @@
     {
         if($_GET['login']=="empty")
         {
-            echo "<p>enter all fields</p>";
+            echo "<p style='color:red; text-align:center; font-size:140%;'>*enter all fields</p>";
         }
         elseif($_GET['login']=="wrong")
         {
-            echo "<p>wrong username or password</p>";
+            echo "<p style='color:red; text-align:center; font-size:140%'>*wrong username or password</p>";
         }
         
     }
