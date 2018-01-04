@@ -29,7 +29,7 @@
         </form>
             <br>
             <div id="signupopt">
-                Don't have an account? <a id="sulink" href="#" onclick="myFunc()">Sign Up</a>
+                Don't have an account? <a id="sulink" href="signup.php" onclick="myFunc()">Sign Up</a>
             </div>
             <br>
             <br>
