@@ -63,7 +63,7 @@
             }
             else
             {
-                echo "<p>Successful</p>";
+                header("Location: login.php");
             }
     }
 ?>
