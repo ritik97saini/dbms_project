@@ -1,0 +1,30 @@
+CREATE TABLE user_admin(
+    admin_id varchar(128) PRIMARY KEY NOT null ,
+    pwd varchar(256) not null,
+    firstname varchar(128) not null,
+    lastname varchar(128) not null,
+    email varchar(128) not null,
+    contact varchar(15) not null,
+    gender varchar(128),
+    organisation varchar(128) ,
+    designation varchar(128) 
+    );
+
+CREATE TABLE user_student(
+    student_id varchar(128) PRIMARY KEY NOT null ,
+    pwd varchar(256) not null,
+    firstname varchar(128) not null,
+    lastname varchar(128) not null,
+    dob date,
+    email varchar(128) not null,
+    contact varchar(15) not null,
+    gender varchar(128),
+    organisation varchar(128),
+    branch varchar(128),
+    passing_year int ,
+    x_percentage real ,
+    xii_percentage real,
+    be_percentage real,
+    resume_status int,
+    profilepic_status int 
+    );
