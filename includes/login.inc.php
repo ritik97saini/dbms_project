@@ -1,5 +1,9 @@
 <?php
 
+
+session_start();
+
+
 if(isset($_POST['submit']))
 {
 	include 'dbh.inc.php';
@@ -14,26 +18,68 @@ if(isset($_POST['submit']))
 	}
 	else
 	{
-		$sql="select * from users where user_uid='$userid'";
-		$result=mysqli_query($conn,$sql);
-		$resultlist=mysqli_num_rows($result);
-		$row=mysqli_fetch_assoc($result);
-		echo password_verify($pwd,$row['user_pwd']);
-		if($resultlist>0 and password_verify($pwd,$row['user_pwd'])==1)
-		{
-			$_SESSION['u_first']=$row['user_first'];
-			$_SESSION['u_last']=$row['user_last'];
-			$_SESSION['u_uid']=$row['user_uid'];
-			$_SESSION['u_email']=$row['user_email'];
+		$sql="select * from user_admin where admin_id='$userid'";
+		$result1=mysqli_query($conn,$sql);
+		$resultlist1=mysqli_num_rows($result1);
+		
 
-			header("Location: ../new.php");
-			exit();
+		$sql="select * from user_student where student_id='$userid'";
+		$result2=mysqli_query($conn,$sql);
+		$resultlist2=mysqli_num_rows($result2);
+
+
+		if($resultlist1>0)
+		{
+		//  IF USER IS  AN ADMIN  
+
+
+			$row=mysqli_fetch_assoc($result1);
+			echo password_verify($pwd,$row['pwd']);
+			if(password_verify($pwd,$row['pwd'])==1)
+			{
+				$_SESSION['u_first']=$row['firstname'];
+				$_SESSION['u_last']=$row['lastname'];
+				$_SESSION['u_uid']=$row['admin_id'];
+				$_SESSION['u_email']=$row['email'];
+
+				header("Location: ../admin_tab.php");
+				exit();
+			}
+			else
+			{
+				header("Location: ../login.php?login=wrong");
+				exit();	
+			}
+		}
+
+		elseif($resultlist2>0)
+		{
+		//  IF USER IS A STUDNET
+
+
+			$row=mysqli_fetch_assoc($result2);
+			echo password_verify($pwd,$row['pwd']);
+			if(password_verify($pwd,$row['pwd'])==1)
+			{
+				$_SESSION['u_first']=$row['firstname'];
+				$_SESSION['u_last']=$row['lastname'];
+				$_SESSION['u_uid']=$row['student_id'];
+				$_SESSION['u_email']=$row['email'];
+
+				header("Location: ../student_tab.php");
+				exit();
+			}
+			else
+			{
+				header("Location: ../login.php?login=wrong");
+				exit();	
+			}
 		}
 		else
-		{
-			header("Location: ../login.php?login=wrong");
-			exit();	
-		}
+			{
+				header("Location: ../login.php?login=wrong");
+				exit();	
+			}
 		
 	}
 }

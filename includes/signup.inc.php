@@ -26,12 +26,17 @@
 		}
 		else
 		{
-			$sql="select * from users where user_uid='$uid';";
+			$sql="select * from user_admin where admin_id='$uid';";
 			$result=mysqli_query($conn,$sql);
 
-			$resultCheck=mysqli_num_rows($result);
+			$resultCheck1=mysqli_num_rows($result);
 
-			if($resultCheck>0)
+			$sql="select * from user_student where student_id='$uid';";
+			$result=mysqli_query($conn,$sql);
+
+			$resultCheck2=mysqli_num_rows($result);
+
+			if($resultCheck1>0||$resultCheck2>0)
 			{
 				header("Location: ../signup.php?signup=usertaken");
 				exit();
@@ -42,8 +47,16 @@
 				$hashPwd=password_hash($pwd,PASSWORD_DEFAULT);
 
 				//inserting data
-				$sql="insert into users(user_first,user_last,user_email, user_uid,user_pwd) values('$first','$last','$email','$uid','$hashPwd');";
+				if($role=="admin")
+				{
+					$sql="insert into user_admin(firstname,lastname,email,admin_id,pwd,contact) values('$first','$last','$email','$uid','$hashPwd','$contact');";
+				}
+				else
+				{
+					$sql="insert into user_student(firstname,lastname,email, student_id,pwd,contact) values('$first','$last','$email','$uid','$hashPwd','$contact');";
 
+				}
+				
 				mysqli_query($conn,$sql);
 				header("Location: ../signup.php?signup=success");
 				exit();
