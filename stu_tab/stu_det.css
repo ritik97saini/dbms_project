@@ -1,0 +1,53 @@
+h3{
+  font-family: Calibri; 
+  font-size: 35pt;         
+  font-style: normal; 
+  font-weight: bold; 
+  color:White;
+  text-align: center; 
+  text-decoration: underline
+}
+
+table{
+  font-family: Calibri; 
+  color:white; 
+  font-size: 11pt; 
+  font-style: normal;
+  font-weight: bold;
+  text-align:; 
+  background-color: #000000; 
+  opacity: 0.66
+}
+table.inner{
+  border: 0px
+}
+
+.input{
+  font-style: Calibri;
+  color: White;
+  font-weight: bold;
+  background-color: #000000
+}
+.submit_btn{
+   background: linear-gradient(#000099, #000099);
+    background-color: #cc0000;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #fff #fff #fff;
+    line-height: 126%;
+    font-family: 'Freight Sans Bold', Helvetica, Arial, sans-serif !important;
+    font-weight: bold !important;
+    text-rendering: optimizelegibility;
+    font-size: 19px;
+    letter-spacing: inherit;
+    min-width: 150px;
+    padding: 7px 20px;
+    text-align: center
+    border: 1px solid;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0,0,0,.5);
+    border-width: thin;
+}
