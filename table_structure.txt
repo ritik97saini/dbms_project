@@ -7,7 +7,8 @@ CREATE TABLE user_admin(
     contact varchar(15) not null,
     gender varchar(128),
     organisation varchar(128) ,
-    designation varchar(128) 
+    designation varchar(128) ,
+    profilepic_status int 
     );
 
 CREATE TABLE user_student(
@@ -26,5 +27,5 @@ CREATE TABLE user_student(
     xii_percentage real,
     be_percentage real,
     resume_status int,
-    profilepic_status int 
+    profilepic_status int  
     );
