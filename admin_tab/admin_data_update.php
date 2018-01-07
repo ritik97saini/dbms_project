@@ -28,7 +28,7 @@ echo 1;
         {
             if(ferror==0)
             {
-                if(in_array($newext,$allowed))
+                if(in_array($newext,$allowed)||$filename=='')
                 {
                     $sql="update user_admin set firstname='$firstname',lastname='$lastname',email='$emailid',contact='$mobileno',gender='$gender',organisation='$organisation',designation='$designation',profilepic_status='1' where admin_id='$id' ;";
                     $id=$_SESSION['u_uid'];
@@ -36,6 +36,7 @@ echo 1;
                     
                     mysqli_query($conn,$sql);
                     $dest="uploads/".$newfilename;
+                    if($filename!='')
                     move_uploaded_file($ftmp,$dest);
                     
                     header("Location: admin_profile_display.php");
