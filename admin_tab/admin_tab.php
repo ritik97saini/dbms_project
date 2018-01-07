@@ -1,3 +1,7 @@
+ 
+<?php include '../includes/dbh.inc.php';
+session_start();
+?>
  <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -5,18 +9,31 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>2 Column Layout &mdash; Left Menu with Header &amp; Footer</title>
 		<link rel="stylesheet" href="admin_tab.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	
 	<body>		
-		
+		<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      
+      <li><a href="admin_profile_display.php">Profile</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      
+      <li><a href="../includes/logout.inc.php" ><span class="glyphicon glyphicon-log-in" ></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
 
 					
 
-		<header id="header">
-			<div class="innertube">
-				<h1>Header...</h1>
-			</div>
-		</header>
 		
 		<div id="wrapper">
 		
@@ -36,9 +53,16 @@
 					<ul>
 						<!-- here goes php script for joined groups to be displayed -->
 						<?php
-							$sql="select group name "
+							$sql="SELECT grp_name FROM group_info;";
+							$query=mysqli_query($conn,$sql);
 
-						?>
+							while ($row=mysqli_fetch_assoc($query)) { ?>
+							<li>
+								<?php echo $row['grp_name']; ?>
+							</li>
+							<?php } ?>
+
+				
 					</ul>
 					<input type="button" id ="add_grp" class="submit_btn" name ="submit" value="ADD A GROUP" > 
 					<div  id="popup" style="display: none;" class="popup" >
