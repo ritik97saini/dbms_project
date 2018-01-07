@@ -59,7 +59,7 @@ $id=$_SESSION['u_uid'];
 					<ul>
 						<!-- here goes php script for joined groups to be displayed -->
 						<?php
-							$sql="SELECT grp_name FROM group_info where org_id='$id';";
+							$sql="SELECT grp_name FROM group_info where admin_id='$id';";
 							$query=mysqli_query($conn,$sql);
 
 							while ($row=mysqli_fetch_assoc($query)) { ?>

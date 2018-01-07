@@ -8,7 +8,7 @@ if(isset($_POST['submit']))
 	$desc=mysqli_real_escape_string($conn,$_POST['desc']);
 echo "1";
     $orgid=$_SESSION['u_uid'];
-	$sql="insert into group_info(grp_name,description,org_id) values('$name','$desc','$orgid');";
+	$sql="insert into group_info(grp_name,description,admin_id,created_on) values('$name','$desc','$orgid',CURDATE());";
 	echo "2";
 	mysqli_query($conn,$sql);
 	echo "3";
