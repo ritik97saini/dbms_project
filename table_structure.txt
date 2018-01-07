@@ -8,7 +8,7 @@ CREATE TABLE user_admin(
     gender varchar(128),
     organisation varchar(128) ,
     designation varchar(128) ,
-    profilepic_status int 
+    profilepic_status int default '0'
     );
 
 CREATE TABLE user_student(
@@ -27,5 +27,22 @@ CREATE TABLE user_student(
     xii_percentage real,
     be_percentage real,
     resume_status int,
-    profilepic_status int  
+    profilepic_status int default '0'
     );
+
+CREATE table group_info(
+    admin_id varchar(128) not null ,
+    group_id varchar(256) not null PRIMARY KEY,
+    created_on date not null,
+    description varchar(512) default ''
+    );
+
+CREATE TABLE group_student( 
+	group_id varchar(256) not null, 
+	student_id varchar(128) not null, 
+	status int default '0', 
+	PRIMARY KEY(group_id,student_id), 
+	FOREIGN KEY (group_id) 
+	REFERENCES group_info(group_id) 
+	ON DELETE CASCADE 
+	);
