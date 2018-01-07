@@ -1,12 +1,14 @@
 <?php
 include 'dbh.inc.php';
+session_start();
 
 if(isset($_POST['submit']))
 {
 	$name=mysqli_real_escape_string($conn,$_POST['grp_name']);
 	$desc=mysqli_real_escape_string($conn,$_POST['desc']);
 echo "1";
-	$sql="insert into group_info(grp_name,description,org_id) values('$name','$desc',1);";
+    $orgid=$_SESSION['u_uid'];
+	$sql="insert into group_info(grp_name,description,org_id) values('$name','$desc','$orgid');";
 	echo "2";
 	mysqli_query($conn,$sql);
 	echo "3";
