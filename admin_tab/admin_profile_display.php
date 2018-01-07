@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <!-- Template by html.am -->
+<?php 
+include '../includes/dbh.inc.php';
+session_start();
+if(!isset($_SESSION['u_uid']))
+{
+    header("Location: ../login.php");
+}
+$id=$_SESSION['u_uid'];
+
+$sql="select *from user_admin where admin_id='$id';";
+$query=mysqli_query($conn,$sql);
+$row=mysqli_fetch_assoc($query);
+$path="uploads/".$id."*";
+$imga=glob($path);
+$img=$imga[0];
+?>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -39,56 +55,46 @@
    
           <div class="panel panel-info" >
             <div class="panel-heading" back >
-              <h3 class="panel-title">Ritik Saini</h3>
+              <h3 class="panel-title"><?php echo $row['firstname']." ".$row['lastname'] ?></h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="PIC.jpg" class="img-circle img-responsive"> </div>
-                
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
+                <div class="col-md-3 col-lg-3 " align="center">
+                    <?php echo '<img alt="User Pic" src='.$img.'     class="img-circle img-responsive">' ;?>
+                </div>
+             
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td>adminid:</td>
-                        <td>ritik97saini</td>
+                        <td><?php echo $row['admin_id'] ?></td>
                       </tr>
                       <tr>
                         <td>Name:</td>
-                        <td>Ritik Saini</td>
+                        <td><?php echo $row['firstname']." ".$row['lastname'] ?></td>
                       </tr>
                       <tr>
                         <td>Email:</td>
-                        <td><a href="mail to:ritik97saini@gmail.com">ritik97saini@gmail.com</a></td>
+                        <td><?php echo $row['email'] ?></td>
                       </tr>
                    
                          <tr>
                              <tr>
                         <td>Gender</td>
-                        <td>Male</td>
+                        <td><?php echo $row['gender'] ?></td>
                       </tr>
                         <tr>
                         <td>Designation</td>
-                        <td>Director</td>
+                        <td><?php echo $row['designation'] ?></td>
                       </tr>
                       <tr>
                         <td>Organisation</td>
-                        <td>NSIT</td>
+                        <td><?php echo $row['organisation'] ?></td>
                       </tr>
                         <tr>
                         <td>Contact</td>
-                        <td>+91-9871880272(Mobile)
+                        <td><?php echo $row['contact'] ?>
                         </td>
                            
                       </tr>

@@ -1,6 +1,12 @@
  
 <?php include '../includes/dbh.inc.php';
 session_start();
+if(!isset($_SESSION['u_uid']))
+{
+    header("Location: ../login.php");
+}
+
+$id=$_SESSION['u_uid'];
 ?>
  <!DOCTYPE html>
 <!-- Template by html.am -->
@@ -53,7 +59,7 @@ session_start();
 					<ul>
 						<!-- here goes php script for joined groups to be displayed -->
 						<?php
-							$sql="SELECT grp_name FROM group_info;";
+							$sql="SELECT grp_name FROM group_info where org_id='$id';";
 							$query=mysqli_query($conn,$sql);
 
 							while ($row=mysqli_fetch_assoc($query)) { ?>
