@@ -2,8 +2,8 @@
 
 session_start();
 
-$_SESSION['u_uid']="v.agarwal";
-if(isset($_POST['submit']))
+// $_SESSION['u_uid']="v.agarwal";
+if(isset($_POST['submit'])&&isset($_SESSION['u_uid']))
 {
 	include 'dbh.inc.php';
 
@@ -61,17 +61,25 @@ if(isset($_POST['submit']))
 					$filenewname=$_SESSION['u_uid']."#resume.".$fileext;
 					$filedest="../uploads/resume/".$filenewname;
 					move_uploaded_file($filetmpname, $filedest);
+				
+
+					$dob=$year."-".$month."-".$day;
+				
+					$uid=$_SESSION['u_uid'];
+					$sql="update user_student
+					set firstname='$first',lastname='$last',email='$email',dob='$dob',gender='$gender',organisation='$college',branch='$branch',passing_year='$passing_year',x_percentage='$x_percent',xii_percentage='$xii_percent',be_percentage='$be_percent',resume_status=1
+					where student_id='$uid';
+					";
+					mysqli_query($conn,$sql);
+					header("Location: ../stu_tab/user_profile.php?error=file_size");
+					exit();
+
 				}
-
-				$dob=$year."-".$month."-".$day;
-				print($dob);
-				$uid=$_SESSION['u_uid'];
-				$sql="update user_student
-				set firstname='$first',lastname='$last',email='$email',dob='$dob',gender='$gender',organisation='$college',branch='$branch',passing_year='$passing_year',x_percentage='$x_percent',xii_percentage='xii_percent',be_percentage='be_percent',resume_status=1
-				where student_id='$uid';
-				";
-
-				mysqli_query($conn,$sql);
+				else
+				{
+					header("Location: ../stu_tab/stu_det.php?error=file_size");
+					exit();
+				}
 			}
 			else
 			{

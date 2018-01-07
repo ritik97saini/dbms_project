@@ -42,7 +42,7 @@ if(isset($_POST['submit']))
 				$_SESSION['u_uid']=$row['admin_id'];
 				$_SESSION['u_email']=$row['email'];
 
-				header("Location: ../admin_tab.php");
+				header("Location: ../amdin_tab/admin_tab.php");
 				exit();
 			}
 			else
@@ -66,7 +66,7 @@ if(isset($_POST['submit']))
 				$_SESSION['u_uid']=$row['student_id'];
 				$_SESSION['u_email']=$row['email'];
 
-				header("Location: ../student_tab.php");
+				header("Location: ../stu_tab/stu_tab.php");
 				exit();
 			}
 			else

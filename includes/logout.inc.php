@@ -2,8 +2,6 @@
 
 session_start();
 
-if(isset($_POST['submit']))
-{
 	session_unset();
 	session_destroy();
 
@@ -11,4 +9,3 @@ if(isset($_POST['submit']))
 	header("Location: ../login.php");
 	exit();
 
-}

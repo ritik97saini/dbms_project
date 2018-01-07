@@ -1,5 +1,10 @@
 <?php
 session_start();
+if(!isset($_SESSION['u_uid']))
+{
+	header("Location: ../login.php");
+	exit();
+}
 ?>
 
 

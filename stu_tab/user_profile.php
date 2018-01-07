@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['u_uid']))
+{
+  header("Location: ../login.php");
+  exit();
+}
+include '../includes/dbh.inc.php';
+?>
+
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -19,7 +29,7 @@
             <a class="navbar-brand" href="#">Winter Training Project</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="stu_tab/stu_tab.php">Home</a></li>
+            <li><a href="stu_tab.php">Home</a></li>
             
       <li class="active"><a href="#">Profile</a></li>
     </ul>
@@ -35,14 +45,49 @@
       
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
    
-   
+          <?php
+               
+                  $uid=$_SESSION["u_uid"];
+                  $sql="select * from user_student where student_id='$uid';";
+                  $result=mysqli_query($conn,$sql);
+                  $row=mysqli_fetch_assoc($result);
+                  $name=$row['firstname']." ".$row['lastname'];
+                  $dob=$row['dob'];
+                  $Username=$row['student_id'];
+                  $email=$row['email'];
+                  $contact=$row['contact'];
+                  $gender=$row['gender'];
+                  $branch=$row['branch'];
+                  $x_percent=$row['x_percentage'];
+                  $xii_percent=$row['xii_percentage'];
+                  $be_percent=$row['be_percentage'];
+                  $passing_year=$row['passing_year'];
+                  $college=$row['organisation'];
+                  $profilepic=$row['profilepic_status'];
+                  $imgfile="";
+                  if($profilepic==0)
+                  {
+                    $imgfile="uploads/profile_pic/default.jpg";
+                  }
+                  else
+                  {
+                    $imgfile="uploads/profile_pic/".$uid."#profilepic"."jpg";
+                  }
+          echo '
           <div class="panel panel-info">
             <div class="panel-heading">
-                <center><h3 class="panel-title">Rohit Kumar</h3></center>
+                <center><h3 class="panel-title">'.$name.'</h3></center>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src= "IMG_3446.PNG" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src= '.$imgfile.' class="img-circle img-responsive">
+                <br><br>
+                
+                <button class="btn btn-primary" onclick>Add photo</button>
+                
+                 </div>
+                
+                
                 
                 <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
                   <dl>
@@ -56,62 +101,63 @@
                     <dd>Male</dd>
                   </dl>
                 </div>-->
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Username:</td>
-                        <td>RK</td>
-                      </tr>
-                      <tr>
-                        <td>Date of Birth:</td>
-                        <td>08/08/1996</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                          <td><a href="mailto:info@support.com">rohitkr.rht78@gmail.com</a></td>
-                      </tr>
-                   
-                      <tr>
-                        <td>Phone Number:</td>
-                        <td>9971056713</td>
-                      </tr>
-                      <tr>
-                        <td>Gender</td>
-                        <td>Male</td>
-                      </tr>
+                 <div class=" col-md-9 col-lg-9 "> 
+                    <table class="table table-user-information">
+                      <tbody>
                         <tr>
-                        <td>Organisation</td>
-                        <td>NSIT</td>
-                      </tr>
-                      <tr>
-                        <td>Branch</td>
-                        <td>IT</td>
-                      </tr>
-                      <tr>
-                        <td>X CGPA</td>
-                        <td>10</td>
-                      </tr>
-                      <tr>
-                        <td>XII Percentage</td>
-                        <td>96</td>
-                      </tr>
-                      <tr>
-                        <td>B.E. Aggregate Percentage</td>
-                        <td>73.7</td>
-                      </tr>
+                          <td>Username:</td>
+                          <td>'.$Username.'</td>
+                        </tr>
+                        <tr>
+                          <td>Date of Birth:</td>
+                          <td>'.$dob.'</td>
+                        </tr>
+                        <tr>
+                          <td>Email</td>
+                            <td><a href="mailto:info@support.com">'.$email.'</a></td>
+                        </tr>
                      
-                    </tbody>
-                  </table>
-                  
-                    <center><a href="stu_det/stu_det.php" class="btn btn-primary">Update Profile</a></center>
-                  
-                </div>
+                        <tr>
+                          <td>Phone Number:</td>
+                          <td>'.$contact.'</td>
+                        </tr>
+                        <tr>
+                          <td>Gender</td>
+                          <td>'.$gender.'</td>
+                        </tr>
+                          <tr>
+                          <td>Organisation</td>
+                          <td>'.$college.'</td>
+                        </tr>
+                        <tr>
+                          <td>Branch</td>
+                          <td>'.$branch.'</td>
+                        </tr>
+                        <tr>
+                          <td>X Percentage</td>
+                          <td>'.$x_percent.'</td>
+                        </tr>
+                        <tr>
+                          <td>XII Percentage</td>
+                          <td>'.$xii_percent.'</td>
+                        </tr>
+                        <tr>
+                          <td>B.E. Aggregate Percentage</td>
+                          <td>'.$be_percent.'</td>
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                    
+                      <center><a href="stu_det.php" class="btn btn-primary">Update Profile</a></center>
+                    </div>
+                  </div>
+                
               </div>
-            </div>
-                 
-            
-          </div>
+                   
+              
+          </div>';
+          ?>
         </div>
       </div>
     </div>
