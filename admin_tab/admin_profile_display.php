@@ -9,12 +9,16 @@ if(!isset($_SESSION['u_uid']))
 }
 $id=$_SESSION['u_uid'];
 
-$sql="select *from user_admin where admin_id='$id';";
+$sql="select * from user_admin where admin_id='$id';";
 $query=mysqli_query($conn,$sql);
 $row=mysqli_fetch_assoc($query);
-$path="uploads/".$id."*";
-$imga=glob($path);
-$img=$imga[0];
+$img="uploads/default.jpg";
+if($row['profilepic_status']!=0)
+{
+  $path="uploads/".$id."*";
+  $imga=glob($path);
+  $img=$imga[0];
+}
 ?>
 <html>
 	<head>

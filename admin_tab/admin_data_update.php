@@ -30,15 +30,17 @@ echo 1;
             {
                 if(in_array($newext,$allowed)||$filename=='')
                 {
-                    $sql="update user_admin set firstname='$firstname',lastname='$lastname',email='$emailid',contact='$mobileno',gender='$gender',organisation='$organisation',designation='$designation',profilepic_status='1' where admin_id='$id' ;";
-                    $id=$_SESSION['u_uid'];
+                    $sql="update user_admin set firstname='$firstname',lastname='$lastname',email='$emailid',contact='$mobileno',gender='$gender',organisation='$organisation',designation='$designation' where admin_id='$id' ;";
                     $newfilename=$id.".p_pic.".$newext;
                     
                     mysqli_query($conn,$sql);
                     $dest="uploads/".$newfilename;
                     if($filename!='')
-                    move_uploaded_file($ftmp,$dest);
-                    
+                    {   
+                        move_uploaded_file($ftmp,$dest);
+                        $sql="update user_admin set profilepic_status='1' where admin_id='$id' ;";
+                        mysqli_query($conn,$sql);
+                    }
                     header("Location: admin_profile_display.php");
                     exit();
                 }
