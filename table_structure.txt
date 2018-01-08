@@ -47,3 +47,38 @@ CREATE TABLE group_student(
 	REFERENCES group_info(group_id) 
 	ON DELETE CASCADE 
 	);
+	
+	
+CREATE TABLE notice(
+    group_id varchar(256) NOT null,
+    notice_id varchar(256) PRIMARY KEY,
+    created_on date not null,
+    type int DEFAULT '0',
+    FOREIGN KEY (group_id) 
+	REFERENCES group_info(group_id) 
+	ON DELETE CASCADE 
+    );
+  
+CREATE TABLE notice_1(
+    notice_id varchar(256) PRIMARY KEY,
+    heading varchar(256) ,
+    description varchar(1024) ,
+    FOREIGN KEY (notice_id) 
+	REFERENCES notice(notice_id) 
+	ON DELETE CASCADE 
+    );
+    
+CREATE TABLE notice_2(
+    notice_id varchar(256) PRIMARY KEY,
+    heading varchar(256) ,
+    description varchar(1024) ,
+    job_type varchar(256) ,
+    ctc varchar(256),
+    deadline date,
+    branches varchar(256),
+    aggregate varchar(256),
+    FOREIGN KEY (notice_id) 
+	REFERENCES notice(notice_id) 
+	ON DELETE CASCADE 
+    );
+    
