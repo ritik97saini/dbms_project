@@ -5,6 +5,11 @@ if(!isset($_SESSION['u_uid']))
 	header("Location: ../login.php");
 	exit();
 }
+include '../includes/dbh.inc.php';
+$id=$_SESSION['u_uid'];
+$sql="select * from user_student where student_id='$id';";
+$query=mysqli_query($conn,$sql);
+$row=mysqli_fetch_assoc($query);
 ?>
 
 
@@ -12,6 +17,7 @@ if(!isset($_SESSION['u_uid']))
 <head>
 <title>Student Registration Form</title>
 <link rel="stylesheet" href="stu_det.css">
+
 </head>
 
  
@@ -26,7 +32,7 @@ if(!isset($_SESSION['u_uid']))
 	<!----- First Name ---------------------------------------------------------->
 	<tr>
 		<td>FIRST NAME</td>
-		<td><input type="text" name="first_name" maxlength="30" class="input" />
+		<td><?php echo '<input type="text" name="first_name" maxlength="30" class="input" value="'.$row['firstname'].'" />';?>
 		(max 30 characters a-z and A-Z)
 		</td>
 	</tr>
@@ -34,8 +40,9 @@ if(!isset($_SESSION['u_uid']))
 	<!----- Last Name ---------------------------------------------------------->
 	<tr>
 		<td>LAST NAME</td>
-		<td><input type="text" name="last_name" maxlength="30" class="input" />
-		(max 30 characters a-z and A-Z)
+		<td><?php echo '<input type="text" name="last_name" maxlength="30" class="input"  value="'.$row['lastname'].'"/>
+			';?>
+			(max 30 characters a-z and A-Z)
 		</td>
 	</tr>
 	 
@@ -44,7 +51,7 @@ if(!isset($_SESSION['u_uid']))
 		<td>DATE OF BIRTH</td>
 	 
 	<td>
-	<select name="birth_day" id="Birthday_Day">
+	<select name="birth_day" id="Birthday_Day" >
 		<option value="-1">Day:</option>
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -144,14 +151,14 @@ if(!isset($_SESSION['u_uid']))
 	<!----- Email Id ---------------------------------------------------------->
 	<tr>
 		<td>EMAIL ID</td>
-		<td><input type="text" name="email" maxlength="100" class="input" /></td>
+		<td><?php echo '<input type="text" name="email" maxlength="100" class="input" value="'.$row['email'].'"/>'; ?></td>
 	</tr>
 	 
 	<!----- Mobile Number ---------------------------------------------------------->
 	<tr>
 		<td>MOBILE NUMBER</td>
 		<td>
-		<input type="text" name="mob_no" maxlength="10" class="input" />
+		<?php echo '<input type="text" name="mob_no" maxlength="10" class="input"  value="'.$row['contact'].'"/>'; ?>
 		(10 digit number)
 		</td>
 	</tr>
@@ -160,15 +167,25 @@ if(!isset($_SESSION['u_uid']))
 	<tr>
 		<td>GENDER</td>
 		<td>
-		Male <input type="radio" name="gender" value="Male" checked />
-		Female <input type="radio" name="gender" value="Female" />
+		<?php
+		if($row['gender']=='Male'){
+        	echo '
+					Male <input type="radio" name="gender" value="Male" checked  />
+						Female <input type="radio" name="gender" value="Female" />';}
+        else
+        {
+            echo '
+				Male <input type="radio" name="gender" value="Male"   />
+				Female <input type="radio" name="gender" value="Female" checked />';
+            } ?>
 		</td>
 	</tr>
 	 
 	<tr>
 		<td>COLLEGE</td>
 		<td>
-		<input type="text" name="college" class="input" />
+		<?php echo'
+		<input type="text" name="college" class="input" value="'.$row['organisation'].'"/>';?>
 		</td>
 	</tr>
 	 
@@ -177,13 +194,13 @@ if(!isset($_SESSION['u_uid']))
 		<td>BRANCH</td>
 		<td>
 			<select name="branch" class="input" >
-				<option value="cs">computer science</option>
-				<option value="it">information techonology</option>
-				<option value="ece">electronics and communication engineering </option>
-				<option value="me">mechanical engineering </option>
-				<option value="civil">civil engineering</option>
-				<option value="bt">biotech engineering</option>
-				<option value="mpae">manufacturing and process engineering </option>
+				<option value="computer science">computer science</option>
+				<option value="information techonology">information techonology</option>
+				<option value="electronics and communication engineering">electronics and communication engineering </option>
+				<option value="mechanical engineering">mechanical engineering </option>
+				<option value="civil engineering">civil engineering</option>
+				<option value="biotech engineering">biotech engineering</option>
+				<option value=">manufacturing and process engineering">manufacturing and process engineering </option>
 				
 			</select>
 		</td>
@@ -204,7 +221,9 @@ if(!isset($_SESSION['u_uid']))
 	<!----- Class X percentage ---------------------------------------------------------->
 	<tr>
 		<td>Class X Percentage</td>
-		<td><input type="text" name="x_percent" maxlength="30" class="input" />
+		<td>
+		<?php echo'
+		<input type="text" name="x_percent" maxlength="30" class="input"  value="'.$row['x_percentage'].'"/>';?>
 		(upto two decimal places)
 		</td>
 	</tr>
@@ -213,7 +232,8 @@ if(!isset($_SESSION['u_uid']))
 	<!----- Class XII percentage ---------------------------------------------------------->
 	<tr>
 		<td>Class XII Percentage</td>
-		<td><input type="text" name="xii_percent" maxlength="30" class="input" />
+		<td><?php echo'
+		<input type="text" name="xii_percent" maxlength="30" class="input"  value="'.$row['xii_percentage'].'"/>';?>
 		(upto two decimal places)
 		</td>
 	</tr>
@@ -221,7 +241,8 @@ if(!isset($_SESSION['u_uid']))
 	<!----- B.E. percentage ---------------------------------------------------------->
 	<tr>
 		<td>B.E. Percentage (Aggregate)</td>
-		<td><input type="text" name="be_percent" maxlength="30" class="input"/>
+		<td><?php echo'
+		<input type="text" name="be_percent" maxlength="30" class="input"  value="'.$row['be_percentage'].'"/>';?>
 		(without drop)
 		</td>
 	</tr>
