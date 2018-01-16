@@ -21,8 +21,8 @@ if(isset($_POST['submit'])
 	$job_type=mysqli_real_escape_string($_POST['job_type']);
 	$ctc=mysqli_real_escape_string($_POST['ctc']);
 	$deadline=mysqli_real_escape_string($_POST['deadline']);
-	$branches=mysqli_real_escape_string($_POST['branches']);
 	$aggregate=mysqli_real_escape_string($_POST['aggregate']);
+	$branches=$_POST['branches'];
 
 	if(empty($header)||empty($des)||empty($job_type)||empty($deadline)||empty($branches)||empty($aggregate))
 	{
@@ -51,9 +51,14 @@ if(isset($_POST['submit'])
 			}	
 		}
 		$b_list="0000000";
+		foreach($branches as $t)
+		{
+			$b_list[$t]='1';
+		}
+
 		$sql="insert into notice(group_id,notice_id,created_on,type) values('$gid','$nid',CURDATE(),'$type');";
 		mysqli_query($conn,$sql);
-		$sql="insert into notice_t2(notice_id,heading,description,job_type,ctc,deadline,branches,,aggregate) values($nid','$heading','$des','$job_type','$ctc','$deadline','$b_list','$aggregate');";
+		$sql="insert into notice_t2(notice_id,heading,description,job_type,ctc,deadline,branches,aggregate) values($nid','$heading','$des','$job_type','$ctc','$deadline','$b_list','$aggregate');";
 		mysqli_query($conn,$sql);
 
 		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=success");
