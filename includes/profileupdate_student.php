@@ -71,7 +71,7 @@ if(isset($_POST['submit'])&&isset($_SESSION['u_uid']))
 					where student_id='$uid';
 					";
 					mysqli_query($conn,$sql);
-					header("Location: ../stu_tab/user_profile.php?error=file_size");
+					header("Location: ../stu_tab/user_profile.php");
 					exit();
 
 				}
