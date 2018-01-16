@@ -15,13 +15,13 @@ include '../includes/dbh.inc.php';
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>2 Column Layout &mdash; Left Menu with Header &amp; Footer</title>
 		<link rel="stylesheet" href="stu_tab.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	
-    <body background = "profile_back.jpg">
+    <body background = "admin_tab.jpg">
     
     <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -46,7 +46,8 @@ include '../includes/dbh.inc.php';
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
    
           <?php
-               
+                  $dict=array('computer science' , 'information techonology','electronics and communication engineering',
+        'mechanical engineering','civil engineering','biotech engineering','manufacturing and process engineering');
                   $uid=$_SESSION["u_uid"];
                   $sql="select * from user_student where student_id='$uid';";
                   $result=mysqli_query($conn,$sql);
@@ -82,9 +83,9 @@ include '../includes/dbh.inc.php';
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src= '.$imgfile.' class="img-circle img-responsive">
                 <br><br>
-                
-                <button class="btn btn-primary" onclick>Add photo</button>
-                
+                <form method="POST" action="../includes/pictureupdate_student.php" enctype="multipart/form-data">
+                <input type = "file" style="color:transparent;"  title="add photo" />
+                </form>
                  </div>
                 
                 
@@ -131,7 +132,11 @@ include '../includes/dbh.inc.php';
                         </tr>
                         <tr>
                           <td>Branch</td>
-                          <td>'.$branch.'</td>
+                          <td>'.$dict[$branch].'</td>
+                        </tr>
+                         <tr>
+                          <td>Passing Year</td>
+                          <td>'.$passing_year.'</td>
                         </tr>
                         <tr>
                           <td>X Percentage</td>

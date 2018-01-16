@@ -194,13 +194,13 @@ $row=mysqli_fetch_assoc($query);
 		<td>BRANCH</td>
 		<td>
 			<select name="branch" class="input" >
-				<option value="computer science">computer science</option>
-				<option value="information techonology">information techonology</option>
-				<option value="electronics and communication engineering">electronics and communication engineering </option>
-				<option value="mechanical engineering">mechanical engineering </option>
-				<option value="civil engineering">civil engineering</option>
-				<option value="biotech engineering">biotech engineering</option>
-				<option value=">manufacturing and process engineering">manufacturing and process engineering </option>
+				<option value=0 >computer science</option>
+				<option value=1 >information techonology</option>
+				<option value=2 >electronics and communication engineering </option>
+				<option value=3 >mechanical engineering </option>
+				<option value=4 >civil engineering</option>
+				<option value=5 >biotech engineering</option>
+				<option value=6 >manufacturing and process engineering </option>
 				
 			</select>
 		</td>
