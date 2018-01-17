@@ -46,6 +46,14 @@
     
     </div>
     <script>
+        
+         var success ="<?php echo $_GET['status'] ;?>";
+        if(success=="success"){
+window.opener.location.reload();            
+            self.close();
+            
+           
+        }
     var notice1 =document.getElementById('notice1');
         var notice2 =document.getElementById('notice2');
         var notice_1 =document.getElementById('notice_1');
@@ -59,12 +67,7 @@
             notice_1.style.display="none";
         }
     
-        var success ="<?php echo $_GET['status'] ;?>";
-        if(success=="success"){
-window.opener.location.reload();            
-            self.close();
-           
-        }
+       
     
         
     </script>
