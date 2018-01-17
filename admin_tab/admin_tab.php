@@ -107,16 +107,10 @@ $id=$_SESSION['u_uid'];
                                 if($row1['type']==1)
                                 {
                                     $sql2="select * from notice_1 where notice_id='$notice';";
-                                }
-                                else
-                                {
-                                    $sql2="select * from notice_2 where notice_id='$notice';";
-                                }
-                                $query2=mysqli_query($conn,$sql2);
+                                    $query2=mysqli_query($conn,$sql2);
                                 $row2=mysqli_fetch_assoc($query2);
-                                
-                            ?>
-                            <div style="
+                                    ?>
+                                   <div style="
                                 background-color: crimson;
                                 border:10px;
                                 margin: 50px 10px 10px 10px;
@@ -129,11 +123,76 @@ $id=$_SESSION['u_uid'];
 							</p></center>
                             <center><p style="font-size: 15px; align-content: center">
                                 
-                              <?php echo $row2['description']; ?>
+                       Description:       <?php echo $row2['description']; ?>
 							</p><center>
                                 <br>
+                            </div> 
+                                                                                     
+                                <?php                                                     
+                                }
+                                else
+                                {
+                                    $sql2="select * from notice_2 where notice_id='$notice';";
+                                    $query2=mysqli_query($conn,$sql2);
+                                $row2=mysqli_fetch_assoc($query2); ?>
+                                                                                     
+                                    <div style="
+                                background-color: crimson;
+                                border:10px;
+                                margin: 50px 10px 10px 10px;
+                                border-color:cyan ;
+                                padding-top: 10px;
+                                border-radius: 20px;
+                                ">
+							<center><p style="font-size: 40px; align-content: center">                              
+                                <?php echo $row2['heading']; ?>
+							</p></center>
+                            <center><p style="font-size: 15px; align-content: center">
+                                
+                           Description:   <?php echo $row2['description']; ?>
+							</p><center>
+                                <br>
+                           <center><p style="font-size: 15px; align-content: center">
+                                
+                           Job Type:   <?php echo $row2['job_type']; ?>
+							</p><center>
+                                <br>        
+                                 
+                                 <center><p style="font-size: 15px; align-content: center">
+                                
+                          CTC:    <?php echo $row2['ctc']; ?>
+							</p><center>
+                                <br>                                      <center><p style="font-size: 15px; align-content: center">
+                                
+                          Aggregate:    <?php echo $row2['aggregate']; ?>
+							</p><center>
+                                <br>             
+                        <center><p style="font-size: 15px; align-content: center">
+                                
+                            Deadline:  <?php echo $row2['deadline']; ?>
+							</p><center>
+                                <br>        Branches Allowed:                   <?php                         
+                                    
+                                    $dict=array('computer science' , 'information techonology','electronics and communication engineering',
+        'mechanical engineering','civil engineering','biotech engineering','manufacturing and process engineering');
+                                    $branch= $row2['branches']; ?>
+                                   <ul> <?php
+                                    for( $i=0;$i<7;$i++)
+                                    {
+                                        if($branch[$i]=='1') { ?>
+                                    <li> <?php  echo $dict[$i]." <br> "; } ?> </li>
+                                  <?php  } ?>
+                        </ul>
+                              
                             </div>
-							<?php } ?>
+                                                                                     
+                               <?php     
+                                }
+                                
+                                
+                            
+                            
+							 } ?>
                         
                         
                         
