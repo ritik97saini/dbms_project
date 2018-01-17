@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['u_uid']))
 {
 	session_unset();
@@ -11,22 +12,21 @@ function random_str($length)
 	$str="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/><(*&^%$@!+-|";
 	return substr(str_shuffle(str_repeat($str, ceil($length/strlen($str)) )),0,$length);
 }
-if(isset($_POST['submit'])
+if(isset($_POST['submit']))
 {
 	include 'dbh.inc.php';
-	$gid=mysqli_real_escape_string($_GET['gid']);
+	$gid=$_GET['gid'];
 	$type=1;
-	$heading=mysqli_real_escape_string($_POST['heading']);
-	$des=mysqli_real_escape_string($_POST['description']);
-
-	if(empty($header)||empty($des))
+	$heading=mysqli_real_escape_string($conn,$_POST['heading']);
+	$des=mysqli_real_escape_string($conn,$_POST['description']);
+	if(empty($heading)||empty($des))
 	{
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=error");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=error");
 		exit();
 	}
-	elseif(length($heading)>256||length($des)>1024)
+	elseif(strlen($heading)>256||strlen($des)>1024)
 	{
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=length");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=length");
 		exit();
 	}
 	else
@@ -44,19 +44,12 @@ if(isset($_POST['submit'])
 				break;
 			}	
 		}
-
 		$sql="insert into notice(group_id,notice_id,created_on,type) values('$gid','$nid',CURDATE(),'$type');";
 		mysqli_query($conn,$sql);
-		$sql="insert into notice_t1(notice_id,heading,description) values($nid','$heading','$des');";
+		$sql="insert into notice_1(notice_id,heading,description) values('$nid','$heading','$des');";
 		mysqli_query($conn,$sql);
-
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=success");
+		header("Location: ../admin_tab/add_notice.php?gid='$gid'&status=success");
 		exit();
 	}
-
 }
-
-
-
-
 ?>
