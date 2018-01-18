@@ -204,7 +204,7 @@ $id=$_SESSION['u_uid'];
                             var add =document.getElementById('add_notice');
                                add.onclick=function()
                                {
-                                   window.open('add_notice.php?status=&gid=<?php echo $gid; ?>', 'newwindow', 'width=300, height=250'); return false;
+                                   window.open('add_notice.php?status=&gid=<?php echo $gid; ?>', 'newwindow', 'width=300, height=550'); return false;
                                    
                                }
                                 
