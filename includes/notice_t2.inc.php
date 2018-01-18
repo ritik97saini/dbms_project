@@ -59,7 +59,7 @@ if(isset($_POST['submit']))
 		mysqli_query($conn,$sql);
 		$sql="insert into notice_2(notice_id,heading,description,job_type,ctc,deadline,branches,aggregate) values('$nid','$heading','$des','$job_type','$ctc','$deadline','$b_list','$aggregate');";
 		mysqli_query($conn,$sql);
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=success");
+		header("Location: ../admin_tab/add_notice.php?grp=$gid&status=success");
 		exit();
 	}
 }
