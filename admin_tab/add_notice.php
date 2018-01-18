@@ -30,7 +30,7 @@
     </div>
     <div id="notice_2" style="display:none">
      <?php echo' 
-        <form method="post" action="../includes/notice_t1.inc.php?gid='. $gid.'" >
+        <form method="post" action="../includes/notice_t2.inc.php?gid='. $gid.'" >
         <br> &nbsp;&nbsp;<input type="text" name="heading" placeholder="Enter notice heading"><br>
         <br> &nbsp;&nbsp;<textarea name="description" placeholder="Description"></textarea><br>
             <br> &nbsp;&nbsp;<input type="text" name="job_type" placeholder="JOB TYPE"><br>
