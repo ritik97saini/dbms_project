@@ -6,7 +6,6 @@ if(!isset($_SESSION['u_uid']))
 	exit();
 }
 include '../includes/dbh.inc.php';
-
 ?>
 
 
@@ -15,7 +14,7 @@ include '../includes/dbh.inc.php';
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>2 Column Layout &mdash; Left Menu with Header &amp; Footer</title>
+		<title>Student Tab &mdash; Left Menu with Header &amp; Footer</title>
 		<link rel="stylesheet" href="stu_tab.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -65,8 +64,11 @@ include '../includes/dbh.inc.php';
 					<div class="innertube">
 						<?php
                         
-                        if(isset($_GET['grp'])) {
+                        if(isset($_GET['grp'])) 
+                        {
                             $gid = $_GET['grp'];
+                        }
+                        else $gid=$id1;
                             $sql="select * from group_info where group_id='$gid';";
 							$result=mysqli_query($conn,$sql);
 							$resultlist=mysqli_num_rows($result);
@@ -88,13 +90,11 @@ include '../includes/dbh.inc.php';
                                 border-collapse: collapse;
                                 width: 60%;
                             }
-
                             .grp_td {
                                 border: 1px solid #dddddd;
                                 text-align: left;
                                 padding: 8px;
                             }
-
                             .grp_tr:nth-child(even) {
                                 background-color: #dddddd;
                             }
@@ -128,47 +128,65 @@ include '../includes/dbh.inc.php';
                             
                             <div id="notice" style="margin-top:80px; ">
                        
+
                         <div id="disp_post"  >
                             
                             
                         <?php 
-							$sql1="SELECT notice_id,type FROM notice  where group_id='$id1' order by created_on desc;";
-							$query1=mysqli_query($conn,$sql1);
-                            
-							while ($row1=mysqli_fetch_assoc($query1)) {
-                                $notice=$row1["notice_id"];
-                                if($row1["type"]==1)
-                                {
-                                    $sql2="select * from notice_1 where notice_id='$notice';";
-                                }
-                                else
-                                {
-                                    $sql2="select * from notice_2 where notice_id='$notice';";
-                                }
-                                $query2=mysqli_query($conn,$sql2);
-                                $row2=mysqli_fetch_assoc($query2);
-                                ?>
+
+                            $sql="select * from group_student where group_id='$gid' and student_id='$student' ;";
+                            $res=mysqli_query($conn,$sql);
+                            $result=mysqli_fetch_assoc($res);
+                            if($result['status']==1)
+                            {
+    							$sql1="SELECT notice_id,type FROM notice  where group_id='$id1' order by created_on desc;";
+    							$query1=mysqli_query($conn,$sql1);
                                 
-                            
-                            <div style="
-                                background-color: crimson;
-                                border:10px;
-                                margin: 50px 10px 10px 10px;
-                                border-color:cyan ;
-                                padding-top: 10px;
-                                border-radius: 20px;
-                                ">
-						<center><p style="font-size: 40px; align-content: center">                              
-                               <?php echo $row2["heading"]; ?>
-							</p></center>
-                            <center><p style="font-size: 15px; align-content: center">
+    							while ($row1=mysqli_fetch_assoc($query1)) 
+                                {
+                                    $notice=$row1["notice_id"];
+                                    if($row1["type"]==1)
+                                    {
+                                        $sql2="select * from notice_1 where notice_id='$notice';";
+                                    }
+                                    else
+                                    {
+                                        $sql2="select * from notice_2 where notice_id='$notice';";
+                                    }
+                                    $query2=mysqli_query($conn,$sql2);
+                                    $row2=mysqli_fetch_assoc($query2);
+                                    ?>
+                                    
                                 
-                              <?php echo $row2["description"]; ?>
-							</p></center>
-                                <br>
-                            </div>
-							
-                        <?php } ?>
+                                    <div style="
+                                        background-color: crimson;
+                                        border:10px;
+                                        margin: 50px 10px 10px 10px;
+                                        border-color:cyan ;
+                                        padding-top: 10px;
+                                        border-radius: 20px;
+                                        ">
+    						        <center><p style="font-size: 40px; align-content: center">                              
+                                    <?php echo $row2["heading"]; ?>
+    							    </p></center>
+                                    <center><p style="font-size: 15px; align-content: center">
+                                    
+                                    <?php echo $row2["description"]; ?>
+    							    </p></center>
+                                    <br>
+                                    </div>
+    							
+                        <?php } }
+                        elseif($result['status']==0)
+                        {?>
+                            <div > <center><h3>YOU ARE YET TO BE VERIFIED BY THE GROUP ADMIN !!</h3></center></div>
+                        <?php
+                        }
+                        elseif($result['status']==2)
+                        {?>
+                            <div> <center> <h3>YOU HAVE BEEN BLOCKED BY THE GROUP ADMIN !!</h3></center></div>
+                        <?php }
+                        ?>
                         
                         
                         </div>
@@ -196,7 +214,7 @@ include '../includes/dbh.inc.php';
                         </script>
                             
                 
-                        <?php } ?>
+                        
                         
                         
                         
@@ -207,7 +225,7 @@ include '../includes/dbh.inc.php';
 			
 			<nav id="nav">
 				<div class="innertube">
-					<h3>Left heading</h3>
+					<h3>GROUPS</h3>
 					<ul>
 						<!-- here goes php script for joined groups to be displayed -->
 						<?php
@@ -275,14 +293,8 @@ include '../includes/dbh.inc.php';
 								$msg="enter correct group id! ";
 							}
 						}
-
-
 						//   popup message 
-
-
-
 					?>
-
 					</script>
 
 				</div>
