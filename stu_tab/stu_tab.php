@@ -126,7 +126,7 @@ include '../includes/dbh.inc.php';
                                 </table>
                             </div>
                             
-                            <div id="notice" style="margin-top:80px; ">
+                <div id="notice" style="margin-top:80px; ">
                        
 
                         <div id="disp_post"  >
@@ -144,53 +144,125 @@ include '../includes/dbh.inc.php';
                                 
     							while ($row1=mysqli_fetch_assoc($query1)) 
                                 {
-                                    $notice=$row1["notice_id"];
-                                    if($row1["type"]==1)
+                                     $notice=$row1['notice_id'];
+                                   if($row1['type']==1)
                                     {
                                         $sql2="select * from notice_1 where notice_id='$notice';";
+                                        $query2=mysqli_query($conn,$sql2);
+                                        $row2=mysqli_fetch_assoc($query2);
+                        ?>
+                                        <div style="background-color: #ff9966;
+                                            border:10px;
+                                            margin: 50px 10px 10px 10px;
+                                            border-color:cyan ;
+                                            padding-top: 10px;
+                                            border-radius: 20px;
+                                            align-content:center;
+                                            padding-left:70px;
+                                            padding-right:50px;
+                                            padding-bottom:15px;
+                                             
+                                        ">
+                                        <pre class="heading"> <?php echo $row2['heading'];?></pre>
+                                        <pre class="heading" >  <?php echo $row2['description']; ?></pre>
+                                                              
+                                                             
+                                        </div> 
+                                                                                     
+                                <?php                                                     
                                     }
                                     else
                                     {
                                         $sql2="select * from notice_2 where notice_id='$notice';";
-                                    }
-                                    $query2=mysqli_query($conn,$sql2);
-                                    $row2=mysqli_fetch_assoc($query2);
-                                    ?>
-                                    
-                                
+                                        $query2=mysqli_query($conn,$sql2);
+                                        $row2=mysqli_fetch_assoc($query2); 
+                            ?>
+                                                                                     
                                     <div style="
-                                        background-color: crimson;
-                                        border:10px;
-                                        margin: 50px 10px 10px 10px;
-                                        border-color:cyan ;
-                                        padding-top: 10px;
-                                        border-radius: 20px;
+                                                    background-color: #ff9966;
+                                                    border:10px;
+                                                    margin: 50px 10px 10px 10px;
+                                                    border-color:cyan ;
+                                                    padding-top: 10px;
+                                                    border-radius: 20px;
+                                                    padding-left:70px;
+                                                    padding-right:50px;
+                                                    padding-bottom:15px;
                                         ">
-    						        <center><p style="font-size: 40px; align-content: center">                              
-                                    <?php echo $row2["heading"]; ?>
-    							    </p></center>
-                                    <center><p style="font-size: 15px; align-content: center">
-                                    
-                                    <?php echo $row2["description"]; ?>
-    							    </p></center>
-                                    <br>
+                                                
+                                        <pre class="heading"> <?php echo $row2['heading'];?></pre>
+                                        <pre class="heading">  <?php echo $row2['description']; ?></pre>
+                              
+                                          <table class = "grp_table" style="margin-left:10px;">
+                            
+                                                    
+                                               <tr class = "grp_tr">
+                                                        <td class = "grp_td"><pre > CTC</pre></td>
+                                                        <td class = "grp_td"><pre > <?php echo $row2['ctc'];?></pre></td>
+                                                      </tr>
+                                              
+                                               <tr class = "grp_tr">
+                                                        <td class = "grp_td"><pre >JOB TYPE </pre></td>
+                                                        <td class = "grp_td"><pre > <?php echo $row2['job_type'];?></pre></td>
+                                                      </tr>
+                                              
+                                               <tr class = "grp_tr">
+                                                        <td class = "grp_td"><pre > Aggregate </pre></td>
+                                                        <td class = "grp_td"><pre > <?php echo $row2['aggregate'];?></pre></td>
+                                                      </tr>
+                                              
+                                               <tr class = "grp_tr">
+                                                        <td class = "grp_td"><pre >Deadline </pre></td>
+                                                        <td class = "grp_td"><pre > <?php echo $row2['deadline'];?></pre></td>
+                                                      </tr>
+                                              
+                                               <tr class = "grp_tr">
+                                                        <td class = "grp_td"><pre >Branches Allowed </pre></td>
+                                                        <td class = "grp_td" style="width:10px;"><pre style="height:300px;">  
+                                                <?php                         
+                                                
+                                                    $dict=array('computer science' , 'information techonology','electronics and communication engineering',
+                                                                'mechanical engineering','civil engineering','biotech engineering','manufacturing and process engineering');
+                                                     $branch= $row2['branches']; 
+                                                ?>
+                                                    <ul> 
+                                                <?php
+                                                    for( $i=0;$i<7;$i++)
+                                                    {
+                                                        if($branch[$i]=='1') 
+                                                        { 
+                                                ?>
+                                                            <li> 
+                                                <?php       echo $dict[$i]."</li>";
+                                                        }?> 
+                                            <?php  }  
+                                            ?>
+                                                    </ul>  </pre></td>
+                                                    </tr>
+                                      
+                                        </table>
                                     </div>
     							
-                        <?php } }
-                        elseif($result['status']==0)
-                        {?>
-                            <div > <center><h3>YOU ARE YET TO BE VERIFIED BY THE GROUP ADMIN !!</h3></center></div>
-                        <?php
-                        }
-                        elseif($result['status']==2)
-                        {?>
-                            <div> <center> <h3>YOU HAVE BEEN BLOCKED BY THE GROUP ADMIN !!</h3></center></div>
-                        <?php }
-                        ?>
+                            <?php   }
+                                }
+                            }
+                            elseif($result['status']==0)
+                            {
+                    ?>
+                                <div > <center><h3>YOU ARE YET TO BE VERIFIED BY THE GROUP ADMIN !!</h3></center></div>
+                    <?php
+                            }
+                            elseif($result['status']==2)
+                            {
+                    ?>
+                                <div> <center> <h3>YOU HAVE BEEN BLOCKED BY THE GROUP ADMIN !!</h3></center></div>
+                    <?php 
+                            }
+                    ?>
                         
                         
                         </div>
-                            </div>
+                </div>
                         
                             
                         <script>
