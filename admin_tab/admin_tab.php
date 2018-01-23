@@ -161,7 +161,7 @@ $id=$_SESSION['u_uid'];
                                     
                                     <tr class = "grp_tr">
                                         <td class = "grp_td">Description</td>
-                                        <td class = "grp_td"><pre><?php echo $row['description']; ?></pre></td>
+                                        <td class = "grp_td"><?php echo $row['description']; ?></td>
                                     </tr>
                                       
                                     <tr class = "grp_tr">
@@ -272,33 +272,49 @@ $id=$_SESSION['u_uid'];
                                 
                                                     <pre class="heading"> <?php echo $row2['heading'];?></pre>
                                                     <pre class="heading">  <?php echo $row2['description']; ?></pre>
+                                                     <style>
+                            
+                                                            .grp_table1 {
+                                                                margin-left: 200px;
+                                                                font-family: arial, sans-serif;
+                                                                
+                                                                width: 60%;
+                                                            }
+                                                            .grp_td1 {
+                                                                
+                                                                text-align: left;
+                                                                padding: 8px;
+                                                            }
+                                                            
+                                                            
+                                                        </style>
                                   
-                                                    <table class = "grp_table" style="margin-left:10px;">
+                                                    <table class = "grp_table1" style="margin-left:-10px;" border="0">
                         
-                                                        <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre > CTC</pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['ctc'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre > CTC</pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['ctc'];?></pre></td>
                                                         </tr>
 
                                           
-                                                        <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre >JOB TYPE </pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['job_type'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre >JOB TYPE </pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['job_type'];?></pre></td>
                                                         </tr>
                               
-                                                       <tr class = "grp_tr">
-                                                                <td class = "grp_td"><pre > Aggregate </pre></td>
-                                                                <td class = "grp_td"><pre > <?php echo $row2['aggregate'];?></pre></td>
+                                                       <tr >
+                                                                <td class = "grp_td1"><pre > Aggregate </pre></td>
+                                                                <td class = "grp_td1"><pre > <?php echo $row2['aggregate'];?></pre></td>
                                                         </tr>
                                                       
-                                                       <tr class = "grp_tr">
-                                                                <td class = "grp_td"><pre >Deadline </pre></td>
-                                                                <td class = "grp_td"><pre > <?php echo $row2['deadline'];?></pre></td>
+                                                       <tr>
+                                                                <td class = "grp_td1"><pre >Deadline </pre></td>
+                                                                <td class = "grp_td1"><pre > <?php echo $row2['deadline'];?></pre></td>
                                                         </tr>
                                                       
-                                                       <tr class = "grp_tr">
-                                                                <td class = "grp_td"><pre >Branches Allowed </pre></td>
-                                                                <td class = "grp_td" style="width:10px;">
+                                                       <tr>
+                                                                <td class = "grp_td1"><pre >Branches Allowed </pre></td>
+                                                                <td class = "grp_td1" style="width:10px;">
                                                                 <pre style="height:300px;">  
 <?php                         
                                     
@@ -428,7 +444,7 @@ $id=$_SESSION['u_uid'];
                             var add =document.getElementById('add_notice');
                                add.onclick=function()
                                {
-                                   window.open('add_notice.php?status=&gid=<?php echo $gid; ?>', 'newwindow', 'width=300, height=550'); return false;
+                                   window.open('add_notice.php?status=&gid=<?php echo $gid; ?>', 'newwindow', 'width=600, height=550'); return false;
                                    
                                }
                                 
