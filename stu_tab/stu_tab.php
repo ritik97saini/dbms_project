@@ -225,61 +225,86 @@ include '../includes/dbh.inc.php';
                                                         padding-right:50px;
                                                         padding-bottom:15px;
                                                 ">
-                                                    
+                                  
                                                 <pre class="heading"> <?php echo $row2['heading'];?></pre>
                                                 <pre class="heading">  <?php echo $row2['description']; ?></pre>
                                   
-                                                <table class = "grp_table" style="margin-left:10px;">
+                                                <style>
+                            
+                                                            .grp_table1 {
+                                                                margin-left: 200px;
+                                                                font-family: arial, sans-serif;
+                                                                
+                                                                width: 60%;
+                                                            }
+                                                            .grp_td1 {
+                                                                
+                                                                border: 0px;
+                                                                text-align: left;
+                                                                padding: 8px;
+                                                            }
+                                                            
+                                                            
+                                                </style>
+                                                
+                                                <table class = "grp_table1" style="margin-left:-10px;" >
                                 
                                                         
-                                                   <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre > CTC</pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['ctc'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre > CTC</pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['ctc'];?></pre></td>
                                                           </tr>
                                                   
-                                                   <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre >JOB TYPE </pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['job_type'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre >JOB TYPE </pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['job_type'];?></pre></td>
                                                           </tr>
                                                   
-                                                   <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre > Aggregate </pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['aggregate'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre > Aggregate </pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['aggregate'];?></pre></td>
                                                           </tr>
                                                   
-                                                   <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre >Deadline </pre></td>
-                                                            <td class = "grp_td"><pre > <?php echo $row2['deadline'];?></pre></td>
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre >Deadline </pre></td>
+                                                            <td class = "grp_td1"><pre > <?php echo $row2['deadline'];?></pre></td>
                                                           </tr>
                                                   
-                                                   <tr class = "grp_tr">
-                                                            <td class = "grp_td"><pre >Branches Allowed </pre></td>
-                                                            <td class = "grp_td" style="width:10px;"><pre style="height:300px;">  
+                                                        <tr >
+                                                            <td class = "grp_td1"><pre >Branches Allowed </pre></td>
+                                                            <td class = "grp_td1" style="width:10px;"> 
 <?php                         
                                                     
                                                         $dict=array('computer science' , 'information techonology','electronics and communication engineering',
                                                                     'mechanical engineering','civil engineering','biotech engineering','manufacturing and process engineering');
                                                          $branch= $row2['branches']; 
 ?>
-                                                        <ul> 
+                                                       
+                                                        <pre style="height:200px">
 <?php
+
                                                         for( $i=0;$i<7;$i++)
                                                         {
                                                             if($branch[$i]=='1') 
                                                             { 
-?>
-                                                                <li> 
-<?php       
-                                                                echo $dict[$i]."</li>";
-                                                            }
-?> 
-<?php  
+                                                            
+                                                               echo "<li>".$dict[$i]."<br></li>" ; 
+                                                                
+                                                              }
+
                                                         }  
 ?>
-                                                        </ul>  </pre></td>
+                                                        </pre></td>
                                                         </tr>
                                           
                                                 </table>
+                                                <br>
+                                                <center>
+                                                <form  action="../includes/stu_apply.inc.php?grp=<?php echo $gid; ?>&nid=<?php echo $notice; ?>" method="POST">
+                                                    <input type="submit" name="apply" value="APPLY"/>
+                                                </form>
+                                                </center>
+                                                <br>
                                             </div>
         							
 <?php                                   }
