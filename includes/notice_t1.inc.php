@@ -48,7 +48,7 @@ if(isset($_POST['submit']))
 		mysqli_query($conn,$sql);
 		$sql="insert into notice_1(notice_id,heading,description) values('$nid','$heading','$des');";
 		mysqli_query($conn,$sql);
-		header("Location: ../admin_tab/add_notice.php?gid='$gid'&status=success");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=success");
 		exit();
 	}
 }

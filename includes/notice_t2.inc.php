@@ -26,12 +26,12 @@ if(isset($_POST['submit']))
 	$branches=$_POST['branches'];
 	if(empty($heading)||empty($des)||empty($job_type)||empty($deadline)||empty($branches)||empty($aggregate))
 	{
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=error");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=error");
 		exit();
 	}
 	elseif(strlen($heading)>256||strlen($des)>1024||strlen($job_type)>256)
 	{
-		header("Location: ../admin_tab/admin_tab.php?grp=$gid&status=length");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=length");
 		exit();
 	}
 	else
@@ -59,7 +59,7 @@ if(isset($_POST['submit']))
 		mysqli_query($conn,$sql);
 		$sql="insert into notice_2(notice_id,heading,description,job_type,ctc,deadline,branches,aggregate) values('$nid','$heading','$des','$job_type','$ctc','$deadline','$b_list','$aggregate');";
 		mysqli_query($conn,$sql);
-		header("Location: ../admin_tab/add_notice.php?grp=$gid&status=success");
+		header("Location: ../admin_tab/add_notice.php?gid=$gid&status=success");
 		exit();
 	}
 }
